@@ -13,6 +13,12 @@ sales =  {
     "피자붕어빵": 0
 }
 
+price = {
+    "팥붕어빵" : 1000,
+    "슈크림붕어빵" : 1500,
+    "피자붕어빵" : 1500
+}
+
 def order_bread():
     while True:
         bread_type = input("주문할 메뉴를 선택해 주세요. (팥붕어빵, 슈크림붕어빵, 피자붕어빵) 뒤로가기를 원하시면 뒤로가기를 눌러주세요.")
@@ -32,6 +38,7 @@ def order_bread():
             print("없는 메뉴 입니다. 다시 주문해 주세요.")
 
 
+
 #붕어빵 admin 기능
 def admin_mode():
     while True:
@@ -48,6 +55,11 @@ def admin_mode():
         else:
             print("없는 메뉴 입니다. 다시 추가해 주세요.")
 
+def calculation():
+    total = 0 
+    for key in sales:
+        total += (sales[key] * price[key])
+        print(f"오늘의 매출은 {total}원 입니다.")
 
 #붕어빵 메인 화면
 while True: 
@@ -60,4 +72,5 @@ while True:
     elif mode == "관리자":
         admin_mode()
         
-        
+calculation()
+print("시스템을 종료합니다.")        
