@@ -1,76 +1,15 @@
-# 주문, 관리자, 종료 ,3가지 선택을 통해 기능이 작동되도록 한다.
-#input()을 통해 3가지 중 한가지를 입력받아 작동시킬 수 있다.
+from fish_bread_model import BreadShop
 
-stock = {
-    "팥붕어빵": 10,
-    "슈크림붕어빵": 8,
-    "피자붕어빵": 5
-}
+shop = BreadShop()
 
-sales =  {
-    "팥붕어빵": 0,
-    "슈크림붕어빵": 0,
-    "피자붕어빵": 0
-}
-
-price = {
-    "팥붕어빵" : 1000,
-    "슈크림붕어빵" : 1500,
-    "피자붕어빵" : 1500
-}
-
-def order_bread():
-    while True:
-        bread_type = input("주문할 메뉴를 선택해 주세요. (팥붕어빵, 슈크림붕어빵, 피자붕어빵) 뒤로가기를 원하시면 뒤로가기를 눌러주세요.")
-        if bread_type == "뒤로가기":
-            print("주문을 종료합니다.")
-            break
-        if bread_type in stock:
-            bread_count = int(input("주문할 수량을 입력해주세요: "))
-            if  stock[bread_type] >= bread_count:
-                stock[bread_type] -= bread_count
-                sales[bread_type] += bread_count
-                print(f"{bread_type},{bread_count}개가 판매되었습니다.")
-                return
-            else: 
-                print(f"재고가 부족합니다. 현재 {stock[bread_type]}개만 주문 가능합니다.")
-        else:
-            print("없는 메뉴 입니다. 다시 주문해 주세요.")
-
-
-
-#붕어빵 admin 기능
-def admin_mode():
-    while True:
-        bread_type = input("추가할 메뉴를 입력해주세요,(팥붕어빵, 슈크림붕어빵, 피자붕어빵) 뒤로가기를 원하시면 뒤로가기를 눌러주세요.")
-        if bread_type == "뒤로가기":
-            print("관리자 모드를 종료합니다.")
-            break
-        if bread_type in stock:
-            bread_count = int(input("추가할 수량을 입력해주세요."))
-            stock[bread_type] += bread_count
-            print(f"{bread_type}이 {bread_count}개 추가되었습니다.")
-            print(f"현재{bread_type}의 재고는 {stock[bread_type]}개 입니다.")
-            return
-        else:
-            print("없는 메뉴 입니다. 다시 추가해 주세요.")
-
-def calculation():
-    total = 0 
-    for key in sales:
-        total += (sales[key] * price[key])
-        print(f"오늘의 매출은 {total}원 입니다.")
-
-#붕어빵 메인 화면
+    #붕어빵 메인 화면
 while True: 
     mode = input("원하는 모드를 선택하세요(주문,관리자,종료):")
     if mode == "종료":
+        shop.calculation()
+        print("시스템을 종료합니다.")     
         break
-
     elif mode == "주문":
-        order_bread()
+        shop.order_bread()
     elif mode == "관리자":
-        admin_mode()
-        
-calculation()
-print("시스템을 종료합니다.")        
+        shop.admin_mode()
