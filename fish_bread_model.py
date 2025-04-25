@@ -45,4 +45,4 @@ class BreadShop:
         total = 0 
         for key in self.sales :
             total += (self.sales[key] * self.price[key])
-            print(f"오늘의 매출은 {total}원 입니다.")
+            print(f"오늘의 매출은{total}원입니다.")
